@@ -1,0 +1,37 @@
+{
+  "name": "babel-plugin-lazy-imports-spr",
+  "version": "0.0.1",
+  "description": "Babel plugin to replace import() with require(), to provide a common lazy load mechanism for mobile and web",
+  "keywords": [
+    "babel",
+    "babel-plugin",
+    "lazy-imports"
+  ],
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "babel src --out-dir lib",
+    "clean": "rm -rf lib/*",
+    "test": "jest test/",
+    "prepublish": "npm run clean && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reactspace/babel-plugin-lazy-imports-spr"
+  },
+  "author": "React Space",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/plugin-syntax-dynamic-import": "7.8.3",
+    "babel-plugin-tester": "9.2.0",
+    "jest": "^24.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.8.4",
+    "@babel/core": "7.8.4",
+    "@babel/register": "7.8.6",
+    "@babel/preset-env": "7.11.0"
+  }
+}
