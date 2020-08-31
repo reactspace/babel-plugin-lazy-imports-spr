@@ -1,8 +1,9 @@
 import dynamicImportSyntax from '@babel/plugin-syntax-dynamic-import';
 
 
-const IMPORT = 'Import';
 const CALL = 'CallExpression';
+const LAZY_IMPORT = 'lazyImport';
+const IDENTIFIER = 'Identifier';
 
 
 export default ({ template, types }) => ({
@@ -10,13 +11,20 @@ export default ({ template, types }) => ({
   inherits: dynamicImportSyntax,
   visitor: {
     Program: {
-      enter(root) {
+      enter(root, { opts }) {
         root.traverse({
           [CALL]: path => {
-            if (path.node.callee.type === IMPORT) {
+            const callee = path.node.callee;
+
+            if (callee.type === IDENTIFIER && callee.name === LAZY_IMPORT) {
               const importArgs = path.node.arguments;
+
+              const replacementCalleeTemplate = opts.replacement ?
+                template(`${opts.replacement}(SOURCE)`)({ SOURCE: importArgs })
+                : template('require(SOURCE)')({ SOURCE: importArgs });
+
               if (types.isStringLiteral(importArgs[0])) {
-                path.replaceWith(template('require(SOURCE)')({ SOURCE: importArgs }));
+                path.replaceWith(replacementCalleeTemplate);
               }
             }
           },

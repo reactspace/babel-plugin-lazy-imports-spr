@@ -1,3 +1,3 @@
 function getModule() {
-  return import("test-module");
+  return lazyImport("test-module");
 }

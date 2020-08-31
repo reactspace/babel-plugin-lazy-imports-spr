@@ -1,2 +1,2 @@
-import(/* test comment */ "test-module");
-import("test-module" /* test comment */ );
+lazyImport(/* test comment */ "test-module");
+lazyImport("test-module" /* test comment */ );

@@ -6,5 +6,6 @@ const path = require('path');
 
 pluginTester({
   plugin,
+  pluginOptions: { replacement: 'require' },
   fixtures: path.join(__dirname, 'fixtures')
 });

@@ -1,1 +1,1 @@
-const testModule = import("test-module");
+const testModule = lazyImport("test-module");
